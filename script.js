@@ -123,14 +123,30 @@
     var previousFocus = document.activeElement;
     var intro = element('div'); intro.className = 'intro-overlay';
     intro.setAttribute('role', 'dialog'); intro.setAttribute('aria-modal', 'true');
-    intro.setAttribute('aria-labelledby', 'intro-title');
+    intro.setAttribute('aria-labelledby', 'splash-title');
     intro.innerHTML = '<div class="intro-panel"><div class="intro-top"><span class="intro-wordmark">averno</span><button type="button" class="intro-close" aria-label="Close introduction">×</button></div><div class="intro-emblem" aria-hidden="true"><span>a</span><i></i></div><p class="eyebrow">CRYPTO ACCOUNTING & TAX REPORTING</p><h2 id="intro-title">A little clarity.<br><em>A better starting point.</em></h2><div class="intro-loading"><div class="intro-loading-label"><span id="intro-loading-title">Loading Averno</span><span aria-hidden="true">↗</span></div><div class="intro-progress" aria-hidden="true"><span></span></div><p id="intro-loading-status" role="status">Preparing the page…</p></div><p class="intro-description" id="intro-description">Explore crypto transaction reconciliation, bookkeeping and accountant-ready reporting.</p><div class="intro-facts"><span>Reconcile your transactions</span><span>Organize the missing pieces</span><span>Prepare for your accountant</span></div><p class="intro-note">Online inquiries are currently unavailable. Service availability and local professional qualifications require confirmation.</p><div class="intro-actions"><button type="button" class="button intro-continue">Continue to Averno ↗</button><button type="button" class="text-button intro-skip">Skip introduction</button></div></div>';
+    var splash = element('div'); splash.className = 'brand-splash';
+    splash.innerHTML = '<div class="splash-content"><div class="splash-mark" aria-hidden="true">a</div><h2 id="splash-title">averno</h2><p class="splash-subtitle">Crypto Accounting &amp; Tax Reporting</p><div class="splash-track" aria-hidden="true"><span></span></div><p class="splash-caption">A clearer view of your crypto records.</p><button class="text-button splash-skip" type="button">Skip introduction →</button></div>';
+    intro.insertBefore(splash, intro.firstChild);
+    intro.classList.add('splash-active');
+    var welcome = intro.querySelector('.intro-panel'); welcome.hidden = true;
+    var splashFinished = false; var documentReady = document.readyState === 'complete';
+    function showWelcome() {
+      if (!intro.parentNode || !splashFinished || !documentReady) return;
+      var focusWasInside = intro.contains(document.activeElement);
+      splash.hidden = true; welcome.hidden = false; intro.classList.remove('splash-active');
+      intro.setAttribute('aria-labelledby', 'intro-title');
+      firstButton = intro.querySelector('.intro-close');
+      if (focusWasInside) firstButton.focus();
+    }
+    splash.querySelector('.splash-track span').addEventListener('animationend', function () { splashFinished = true; showWelcome(); });
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) splashFinished = true;
     var background = Array.prototype.slice.call(document.body.children);
     var saved = background.map(function (node) { return { node: node, aria: node.getAttribute('aria-hidden'), inert: node.inert }; });
     document.body.appendChild(intro);
     saved.forEach(function (item) { item.node.setAttribute('aria-hidden', 'true'); item.node.inert = true; });
     var oldOverflow = document.body.style.overflow; document.body.style.overflow = 'hidden';
-    var firstButton = intro.querySelector('.intro-close');
+    var firstButton = intro.querySelector('.splash-skip');
     function dismissIntro() {
       if (!intro.parentNode) return;
       intro.remove(); document.body.style.overflow = oldOverflow;
@@ -141,7 +157,7 @@
     intro.addEventListener('keydown', function (event) {
       if (event.key === 'Escape') { event.preventDefault(); dismissIntro(); }
       if (event.key === 'Tab') {
-        var buttons = intro.querySelectorAll('button'); var last = buttons[buttons.length - 1];
+        var buttons = Array.prototype.filter.call(intro.querySelectorAll('button'), function (button) { return button.getClientRects().length > 0; }); var last = buttons[buttons.length - 1];
         if (event.shiftKey && document.activeElement === firstButton) { event.preventDefault(); last.focus(); }
         else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); firstButton.focus(); }
       }
@@ -149,6 +165,7 @@
     firstButton.focus();
     function pageReady() {
       if (!intro.parentNode) return;
+      documentReady = true; showWelcome();
       intro.classList.add('intro-ready');
       intro.querySelector('#intro-loading-title').textContent = 'Ready to explore';
       intro.querySelector('#intro-loading-status').textContent = 'Services, country information and reporting options are ready.';

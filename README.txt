@@ -81,3 +81,10 @@ The introduction includes an indeterminate green loading bar while the document
 loads and a short completion animation when it is ready. It does not imply that
 client records are being accessed or analyzed. There is no fabricated percentage,
 forced delay or disabled exit. Reduced-motion removes the animation.
+
+SEPARATE INTRO SCREEN
+A full-screen brand entrance now precedes the welcome dialog. Its two-second
+bar is a decorative brand transition, not fabricated network progress. Skip and
+Escape exit immediately. Reduced motion skips the transition. The welcome
+opens once the entrance finishes and the document is ready. Public draft labels
+were removed; the policy texts still require review before production use.
