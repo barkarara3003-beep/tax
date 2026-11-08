@@ -35,7 +35,7 @@ actual iOS device validation is still required before publication.
 REQUIRED BEFORE PUBLICATION
 1. Replace pre-launch disclosures with verified legal entity, registration,
    business address and operational contacts. Never publish invented credentials.
-   support@averno.example is an example only and is intentionally not linked.
+   No example email or placeholder legal identity is displayed.
 2. Confirm availability and appropriately qualified professionals in each country,
    including restrictions on tax advice, filing, financial reporting and payroll.
    Canadian English scope excludes Quebec. Do not imply universal filing rights.
@@ -70,3 +70,8 @@ and returned to the page; reduced-motion is respected. No preference is stored.
 Deep links skip the introduction. With JavaScript off it is not shown.
 Repeated preview labels have been reduced; the footer retains the project status,
 the form retains its unavailability warning, and policies remain review drafts.
+
+CONTENT CLEANUP
+Removed the placeholder contact and the public list of missing company details.
+The form still states that online submission is unavailable. No company identity
+or credentials have been invented. Policy review notes remain applicable.
