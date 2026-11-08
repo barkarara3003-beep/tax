@@ -13,3 +13,9 @@
 @keyframes intro-orbit{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @media(max-width:600px){.intro-overlay{padding:14px;align-items:flex-start}.intro-panel{padding:20px 23px 24px}.intro-panel h2{font-size:36px}.intro-emblem{margin:0 0 20px;width:78px;height:78px}.intro-emblem span{width:54px;height:54px;font-size:52px}.intro-description{min-height:0}.intro-actions{gap:8px 15px}.intro-top{margin-bottom:6px}}
 @media(prefers-reduced-motion:reduce){.intro-emblem i{animation:none!important;transform:none!important}}
+
+/* Indeterminate while the document loads; a short completion motion when ready. */
+.intro-loading{margin:0 0 20px}.intro-loading-label{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;color:var(--green);margin-bottom:9px}.intro-progress{height:5px;background:#dbe3d3;border-radius:5px;overflow:hidden}.intro-progress span{display:block;height:100%;width:35%;border-radius:5px;background:var(--green);animation:averno-loading 1.3s ease-in-out infinite}.intro-loading>p{font-size:10px;color:var(--muted);margin:8px 0 0;line-height:1.5}.intro-ready .intro-progress span{width:100%;animation:averno-complete .85s cubic-bezier(.2,.65,.3,1) both}.intro-loading+.intro-description{min-height:0}
+@keyframes averno-loading{0%{transform:translateX(-110%)}100%{transform:translateX(390%)}}
+@keyframes averno-complete{from{transform:scaleX(.05);transform-origin:left}to{transform:scaleX(1);transform-origin:left}}
+@media(prefers-reduced-motion:reduce){.intro-progress span{animation:none!important;transform:none!important}}

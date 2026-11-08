@@ -75,3 +75,9 @@ CONTENT CLEANUP
 Removed the placeholder contact and the public list of missing company details.
 The form still states that online submission is unavailable. No company identity
 or credentials have been invented. Policy review notes remain applicable.
+
+LOADING MOTION
+The introduction includes an indeterminate green loading bar while the document
+loads and a short completion animation when it is ready. It does not imply that
+client records are being accessed or analyzed. There is no fabricated percentage,
+forced delay or disabled exit. Reduced-motion removes the animation.

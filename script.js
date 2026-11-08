@@ -124,7 +124,7 @@
     var intro = element('div'); intro.className = 'intro-overlay';
     intro.setAttribute('role', 'dialog'); intro.setAttribute('aria-modal', 'true');
     intro.setAttribute('aria-labelledby', 'intro-title');
-    intro.innerHTML = '<div class="intro-panel"><div class="intro-top"><span class="intro-wordmark">averno</span><button type="button" class="intro-close" aria-label="Close introduction">×</button></div><div class="intro-emblem" aria-hidden="true"><span>a</span><i></i></div><p class="eyebrow">CRYPTO ACCOUNTING & TAX REPORTING</p><h2 id="intro-title">A little clarity.<br><em>A better starting point.</em></h2><p class="intro-description" id="intro-description" role="status">Loading the page…</p><div class="intro-facts"><span>Reconcile your transactions</span><span>Organize the missing pieces</span><span>Prepare for your accountant</span></div><p class="intro-note">Online inquiries are currently unavailable. Service availability and local professional qualifications require confirmation.</p><div class="intro-actions"><button type="button" class="button intro-continue">Continue to Averno ↗</button><button type="button" class="text-button intro-skip">Skip introduction</button></div></div>';
+    intro.innerHTML = '<div class="intro-panel"><div class="intro-top"><span class="intro-wordmark">averno</span><button type="button" class="intro-close" aria-label="Close introduction">×</button></div><div class="intro-emblem" aria-hidden="true"><span>a</span><i></i></div><p class="eyebrow">CRYPTO ACCOUNTING & TAX REPORTING</p><h2 id="intro-title">A little clarity.<br><em>A better starting point.</em></h2><div class="intro-loading"><div class="intro-loading-label"><span id="intro-loading-title">Loading Averno</span><span aria-hidden="true">↗</span></div><div class="intro-progress" aria-hidden="true"><span></span></div><p id="intro-loading-status" role="status">Preparing the page…</p></div><p class="intro-description" id="intro-description">Explore crypto transaction reconciliation, bookkeeping and accountant-ready reporting.</p><div class="intro-facts"><span>Reconcile your transactions</span><span>Organize the missing pieces</span><span>Prepare for your accountant</span></div><p class="intro-note">Online inquiries are currently unavailable. Service availability and local professional qualifications require confirmation.</p><div class="intro-actions"><button type="button" class="button intro-continue">Continue to Averno ↗</button><button type="button" class="text-button intro-skip">Skip introduction</button></div></div>';
     var background = Array.prototype.slice.call(document.body.children);
     var saved = background.map(function (node) { return { node: node, aria: node.getAttribute('aria-hidden'), inert: node.inert }; });
     document.body.appendChild(intro);
@@ -150,6 +150,8 @@
     function pageReady() {
       if (!intro.parentNode) return;
       intro.classList.add('intro-ready');
+      intro.querySelector('#intro-loading-title').textContent = 'Ready to explore';
+      intro.querySelector('#intro-loading-status').textContent = 'Services, country information and reporting options are ready.';
       intro.querySelector('#intro-description').textContent = 'Bring scattered crypto records into one coherent picture. Explore reconciliation, bookkeeping and accountant-ready reporting.';
     }
     if (document.readyState === 'complete') pageReady(); else window.addEventListener('load', pageReady, { once: true });
